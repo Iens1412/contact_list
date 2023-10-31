@@ -86,13 +86,27 @@ namespace dtp7_contact_list
                     if (commandLine.Length == 1)
                     {
                         lastFileName = GetUserDirectory("address.lis");
-                        LoadContactListFromFile(lastFileName);
+                        try
+                        {                     
+                            LoadContactListFromFile(lastFileName);
+                        }
+                        catch (System.IO.FileNotFoundException exc)
+                        {
+                            Console.WriteLine("could not found file addresses.lis!");
+                        }
                     }
                     else if (commandLine.Length == 2)
                     {
+                        
                         lastFileName = GetUserDirectory(commandLine[1]); // commandLine[1] is the first argument
-                        // FIXME: Throws System.IO.FileNotFoundException: 
-                        LoadContactListFromFile(lastFileName);
+                        try
+                        {                                                     // FIXME: Throws System.IO.FileNotFoundException: 
+                            LoadContactListFromFile(lastFileName);
+                        }
+                        catch (System.IO.FileNotFoundException exc)
+                        {
+                            Console.WriteLine($"could not found file {lastFileName}!");
+                        }
                     }
                     else
                     {
